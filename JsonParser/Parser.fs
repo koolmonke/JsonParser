@@ -26,7 +26,7 @@ let private stringLiteral =
             |> char
             |> string)
 
-    let escapedCharSnippet = pstring "\\" >>. (escape <|> unicodeEscape)
+    let escapedCharSnippet = pstring @"\" >>. (escape <|> unicodeEscape)
     let normalCharSnippet = manySatisfy (fun c -> c <> '"' && c <> '\\')
 
     between (pstring "\"") (pstring "\"") (stringsSepBy normalCharSnippet escapedCharSnippet)

@@ -38,7 +38,7 @@ let private collection openBracker closeBracket itemParser =
     >>. sepBy (itemParser .>> spaces) (strWs ",")
     .>> strWs closeBracket
 
-let jsonNull: Parser<_, unit> = stringReturn @"null" JsonNull
+let jsonNull = stringReturn @"null" JsonNull
 
 let jsonBool =
     let jsonTrue = stringReturn @"true" (JsonBool true)

@@ -13,21 +13,22 @@ let rec serialize (tree: JsonValue) =
     | JsonBool false -> "false"
     | JsonFloat fl -> string fl
     | JsonString str ->
-        "\""
-        + (String.collect
-            (function
-            | '\n' -> "\\n"
-            | '\t' -> "\\t"
-            | '\b' -> "\\b"
-            | '\r' -> "\\r"
-            | '\012' -> "\\f"
-            | c -> string c)
-            str)
-        + "\""
+        let stringedStringContents =
+            String.collect
+                (function
+                | '\n' -> "\\n"
+                | '\t' -> "\\t"
+                | '\b' -> "\\b"
+                | '\r' -> "\\r"
+                | '\012' -> "\\f"
+                | c -> string c)
+                str
+
+        $"\"{stringedStringContents}\""
     | JsonList lst ->
-        "["
-        + (lst |> Seq.map serialize |> concatRecords)
-        + "]"
+        let stringedListContents = lst |> Seq.map serialize |> concatRecords
+
+        $"[{stringedListContents}]"
     | JsonObject o ->
         let stringedObjectContents =
             o

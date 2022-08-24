@@ -15,7 +15,9 @@ let private stringLiteral =
             | c -> string c
 
     let unicodeEscape =
-        let hex2int c = (int c &&& 15) + (int c >>> 6) * 9
+        let hex2int c =
+            let c = int c
+            (c &&& 15) + (c >>> 6) * 9
 
         pstring "u"
         >>. pipe4 hex hex hex hex (fun h3 h2 h1 h0 ->

@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CommonTypes.fs" />
-    <Compile Include="JsonSerilizer.fs" />
+    <Compile Include="Serializer.fs" />
     <Compile Include="Parser.fs" />
     <Compile Include="Adapter.fs" />
   </ItemGroup>
